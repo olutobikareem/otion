@@ -32,7 +32,7 @@ export const Navbar = () => {
               </Button>
             </SignInButton>
             <SignInButton>
-              <Button size="sm">Get Otion free </Button>
+              <Button size="sm">Try Otion free </Button>
             </SignInButton>
           </>
         )}

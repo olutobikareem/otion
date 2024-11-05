@@ -11,19 +11,13 @@ import { useSettings } from "@/hook/use-settings";
 import { cn } from "@/lib/utils";
 import { useMutation } from "convex/react";
 import {
-  Bot,
   ChevronLeft,
   MenuIcon,
   Plus,
-  PlusCircle,
-  Wind,
   Search,
   Settings,
-  Timer,
   Trash,
   FileText,
-  ChevronDown,
-  ChevronRight,
 } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
@@ -43,9 +37,11 @@ export const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
+
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
+  
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
   const [isDocumentsExpanded, setIsDocumentsExpanded] = useState(false);
@@ -137,10 +133,6 @@ export const Navigation = () => {
     });
   };
 
-  const toggleDocuments = () => {
-    setIsDocumentsExpanded(!isDocumentsExpanded);
-  };
-
   return (
     <>
       <aside
@@ -163,16 +155,23 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-          {/* <Item label="Breathe" icon={Wind} onClick={settings.onOpen} /> */}
-          {/* <Item label="Pomodoro" icon={Timer} onClick={settings.onOpen} /> */}
-          {/* <Item label="Chat" icon={Bot} onClick={settings.onOpen} /> */}
-          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+          <Item 
+            label="Search" 
+            icon={Search} 
+            isSearch 
+            onClick={search.onOpen} 
+          />
+          <Item 
+            label="Settings" 
+            icon={Settings} 
+            onClick={settings.onOpen} 
+          />
           <Item
             label="Documents"
             icon={FileText}
-            onClick={toggleDocuments}
-            chevron={isDocumentsExpanded ? ChevronDown : ChevronRight}
+            onClick={() => setIsDocumentsExpanded(!isDocumentsExpanded)}
+            expanded={isDocumentsExpanded}
+            onExpand={() => setIsDocumentsExpanded(!isDocumentsExpanded)}
           />
           {isDocumentsExpanded && (
             <div className="pl-4">
@@ -196,7 +195,7 @@ export const Navigation = () => {
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
           className="opacity-0 group-hover/sidebar:opacity-100
-        transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
+          transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
         />
       </aside>
       <div

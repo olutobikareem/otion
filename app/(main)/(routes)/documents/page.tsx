@@ -16,7 +16,7 @@ const DocumentsPage = () => {
 
   const onCreate = () => {
     const promise = create({ title: "Untitled" }).then((documentId) =>
-      router.push(`/documents/${documentId}`),
+      router.push(`/documents/${documentId}`)
     );
 
     toast.promise(promise, {
@@ -25,25 +25,26 @@ const DocumentsPage = () => {
       error: "Failed to create a new note",
     });
   };
+
+  const displayName = user?.firstName || user?.username || "";
+
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-4">
       <Image
         src="/documents-black.png"
-        height="300"
-        width="300"
+        height="100"
+        width="200"
         alt="Empty"
         className="dark:hidden"
       />{" "}
       <Image
         src="/documents-white.png"
-        height="300"
-        width="300"
+        height="100"
+        width="200"
         alt="Empty"
         className="hidden dark:block"
       />
-      <h2 className="text-lg font-medium">
-        Welcome to {user?.firstName}&apos;s Otion
-      </h2>
+      <h2 className="text-lg font-medium">Welcome {displayName}</h2>
       <Button onClick={onCreate}>
         <PlusCircle className="h-4 w-4 mr-2" />
         Create a note

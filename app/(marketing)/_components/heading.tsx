@@ -11,11 +11,11 @@ export const Heading = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   return (
     <div className="max-w-3xl space-y-4">
-      <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
+      <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold">
         Your Ideas, Documents, & Plans. Unified. Welcome to{" "}
         <span className="underline">Otion</span>
       </h1>
-      <h3 className="text-base sm:text-xl md:text-2xl font-medium">
+      <h3 className="text-base sm:text-lg md:text-xl font-medium">
         Otion is the connect workspace where <br />
         better, faster work happens.
       </h3>
@@ -27,7 +27,7 @@ export const Heading = () => {
       {isAuthenticated && !isLoading && (
         <Button asChild>
           <Link href="documents">
-            Enter Otion
+            Enter
             <ArrowRight className="h-4 w-4 ml-2" />
           </Link>
         </Button>
@@ -35,7 +35,7 @@ export const Heading = () => {
       {!isAuthenticated && !isLoading && (
         <SignInButton mode="modal">
           <Button>
-            Get Otion free
+            Sign in
             <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
         </SignInButton>
